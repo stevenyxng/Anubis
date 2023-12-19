@@ -1,0 +1,38 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build run",
+            "type": "shell",
+            "command": "open /Users/steven/Documents/CS2261/mGBA.app ./Project.gba",
+            // add the mGBA.app exact path to the above line,
+            // in between "open" and "./Project.gba"!
+            "problemMatcher": [],
+            "dependsOn": ["build"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "docker run --rm -it -v \"${PWD}:/gba\" aaaronic/gba-compiler:1.2",
+            "problemMatcher": []
+        },
+        {
+            "label": "clean",
+            "type": "shell",
+            "command": "docker run --rm -it -v \"${PWD}:/gba\" aaaronic/gba-compiler:1.2 bash -c 'cd /gba && make clean'",
+            "problemMatcher": []
+        },
+        {
+            "label": "audio",
+            "type": "shell",
+            "command": "docker run --rm -it -v \"${PWD}:/gba\" aaaronic/gba-compiler:1.2 bash -c 'cd /gba && make audio'",
+            "problemMatcher": []
+        }
+    ]
+  }
